@@ -1,0 +1,26 @@
+{
+    "name": "cherry-project/templater",
+    "description": "Cherry-project Template Engine",
+    "type": "library",
+    "keywords": ["cherry","templating"],
+    "homepage": "https://github.com/ABGEO07/cherry-templater",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ABGEO",
+            "email": "takalandzet@gmail.com",
+            "homepage": "http://www.abgeo.ga",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.0",
+        "cherry-project/response": "v1.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cherry\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,63 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "247ebcb7b184fb6956c54be1bf5bf79d",
+    "packages": [
+        {
+            "name": "cherry-project/response",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ABGEO07/cherry-response.git",
+                "reference": "3ec39fa1ac828162e574b55a945b3228cfb19ddf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ABGEO07/cherry-response/zipball/3ec39fa1ac828162e574b55a945b3228cfb19ddf",
+                "reference": "3ec39fa1ac828162e574b55a945b3228cfb19ddf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Cherry\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ABGEO",
+                    "email": "takalandzet@gmail.com",
+                    "homepage": "http://www.abgeo.ga",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Cherry-project Response class",
+            "homepage": "https://github.com/ABGEO07/cherry-response",
+            "keywords": [
+                "cherry",
+                "response"
+            ],
+            "time": "2019-03-28T16:20:49+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.6.0"
+    },
+    "platform-dev": []
+}
