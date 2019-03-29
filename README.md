@@ -30,7 +30,7 @@ $templateEngine = new Templater(PATH_TO_TEMPLATES);
 Where `PATH_TO_TEMPLATES` is path to your templates folder. Ex.: `__DIR__ . '/../examples/templates'`
 
 Create new template in you'r templates folder (Ex.: `index.templater.php`) which contains simple HTML 
-Markup with PHP
+Markup with PHP:
 
 ```php
 <!doctype html>
@@ -59,15 +59,15 @@ $args = [
 ];
 ```
 
-Our index.templater.php template contains ony one PHP Variable `$name`, so we must pass it in `render` method:
+Our `index.templater.php` template contains only one PHP Variable `$name`, so we must pass it in `render` method:
 
 ```php
-$response = $templateEngine->render('index', [
+$response = $templateEngine->render('index.templater.php', [
     'name' => 'Temuri'
 ]);
 ```
 
-After that `$response` Variable will contain Response object and we can print it
+After that `$response` Variable will contain Response object and we can print it:
 
 ```php
 echo $response;
