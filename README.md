@@ -32,7 +32,7 @@ Where `PATH_TO_TEMPLATES` is path to your templates folder. Ex.: `__DIR__ . '/..
 Create new template in you'r templates folder (Ex.: `index.templater.php`) which contains simple HTML 
 Markup with PHP:
 
-```php
+```html
 <!doctype html>
 <html lang="en">
 <head>
