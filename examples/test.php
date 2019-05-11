@@ -10,5 +10,6 @@ define('LOGS_PATH', __DIR__ . '/var/cache');
 $templateEngine = new Templater(__DIR__ . '/../examples/templates');
 
 echo $templateEngine->render('index', [
-    'name' => 'Temuri'
+    'name' => 'Temuri',
+    'surname' => 'Takalandze'
 ]);
