@@ -117,6 +117,13 @@ class Templater
         return $content;
     }
 
+    /**
+     * Prepare template content for caching.
+     *
+     * @param string $content Template content.
+     *
+     * @return string
+     */
     private function _normalizeContent($content)
     {
         // Check if contant has short prints ( {{ textToPrint}} )
