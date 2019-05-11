@@ -126,7 +126,7 @@ class Templater
      */
     private function _normalizeContent($content)
     {
-        // Check if contant has short prints ( {{ textToPrint}} )
+        // Check if content has short prints ( {{ variableToPrint }} )
         if (preg_match_all('/{{(.*?)}}/', $content, $matches)) {
             // Get all short pints and replace to php echo
             foreach ($matches[0] as $k => $v) {
