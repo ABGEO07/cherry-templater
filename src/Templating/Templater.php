@@ -28,6 +28,10 @@ class Templater
 {
     private $_templatesPath;
 
+    private $_cachedTemplatesDir;
+
+    private $_passedVariables = [];
+
     /**
      * Templater constructor.
      *
@@ -36,6 +40,11 @@ class Templater
     public function __construct($templatesPath)
     {
         $this->_templatesPath = $templatesPath;
+        $this->_cachedTemplatesDir = LOGS_PATH . '/templater';
+
+        if (!file_exists($this->_cachedTemplatesDir)) {
+            mkdir($this->_cachedTemplatesDir, 0755, true);
+        }
     }
 
     /**
@@ -52,17 +61,49 @@ class Templater
             $template .= '.templater.php';
         }
 
+        $this->_passedVariables = $variables;
+
+        //Create new Response object
+        $response = new Response();
+
+        //Read given template
+        $content = $this->_readeTemplate($template);
+
+        return $response->sendResponse($content);
+    }
+
+    /**
+     * Read template template content form cached file.
+     *
+     * @param String $template Template name.
+     *
+     * @return string
+     */
+    private function _readeTemplate($template)
+    {
         $templatesPath = $this->_templatesPath;
 
         if (file_exists($templatesPath . '/' . $template)) {
             //Convert array elements into variables
-            extract($variables, EXTR_OVERWRITE);
+            extract($this->_passedVariables, EXTR_OVERWRITE);
+
+            //Get given template content and hash it
+            $templateContent = file_get_contents($templatesPath . '/' . $template);
+            $contentHash = md5(trim($templateContent));
+
+            $cachedTemplate = $this->_cachedTemplatesDir .
+                '/' . $contentHash . '.php';
+
+            //Cache template
+            if (!file_exists($cachedTemplate)) {
+                $this->_cacheTemplate($templateContent);
+            }
 
             //Start Output Buffer session
             ob_start();
 
             // Include Template File
-            include_once "{$templatesPath}/{$template}";
+            include_once "$cachedTemplate";
 
             //Get Buffer value
             $content = ob_get_contents();
@@ -73,9 +114,23 @@ class Templater
             $content = "Template {$template} not found!";
         }
 
-        //Create new Response object
-        $response = new Response();
+        return $content;
+    }
 
-        return $response->sendResponse($content);
+    /**
+     * Cache given template.
+     *
+     * @param string $content Template content for caching.
+     *
+     * @return void
+     */
+    private function _cacheTemplate($content)
+    {
+        $contentHash = md5(trim($content));
+
+        file_put_contents(
+            $this->_cachedTemplatesDir . '/' . $contentHash . '.php',
+            $content
+        );
     }
 }
