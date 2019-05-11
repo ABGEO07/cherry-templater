@@ -40,7 +40,11 @@ class Templater
     public function __construct($templatesPath)
     {
         $this->_templatesPath = $templatesPath;
-        $this->_cachedTemplatesDir = CACHED_TEMPLATES_DIR;
+        $this->_cachedTemplatesDir = LOGS_PATH . '/templater';
+
+        if (!file_exists($this->_cachedTemplatesDir)) {
+            mkdir($this->_cachedTemplatesDir, 0755, true);
+        }
     }
 
     /**
