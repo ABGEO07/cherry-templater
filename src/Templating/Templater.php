@@ -82,9 +82,9 @@ class Templater
 
             //Get given template content and hash it
             $templateContent = file_get_contents($templatesPath . '/' . $template);
-            $contentHash = md5($templateContent);
+            $contentHash = md5(trim($templateContent));
 
-            $cachedTemplate = $this->_cachedTemplatesDir . '/' . $contentHash . '.templater.php';
+            $cachedTemplate = $this->_cachedTemplatesDir . '/' . $contentHash . '.php';
 
             //Cache template
             if (!file_exists($cachedTemplate)) {
@@ -111,8 +111,8 @@ class Templater
 
     private function _cacheTemplate($content)
     {
-        $contentHash = md5($content);
+        $contentHash = md5(trim($content));
 
-        file_put_contents($this->_cachedTemplatesDir . '/' . $contentHash . '.templater.php', $content);
+        file_put_contents($this->_cachedTemplatesDir . '/' . $contentHash . '.php', $content);
     }
 }
