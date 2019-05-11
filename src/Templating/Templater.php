@@ -118,6 +118,30 @@ class Templater
     }
 
     /**
+     * Prepare template content for caching.
+     *
+     * @param string $content Template content.
+     *
+     * @return string
+     */
+    private function _normalizeContent($content)
+    {
+        // Check if content has short prints ( {{ variableToPrint }} )
+        if (preg_match_all('/{{(.*?)}}/', $content, $matches)) {
+            // Get all short pints and replace to php echo
+            foreach ($matches[0] as $k => $v) {
+                $changeMe = $matches[0][$k];
+                $changeTo = '<?php echo $' . trim($matches[1][$k]) . '; ?>';
+
+                // Replace txt in content
+                $content = str_replace($changeMe, $changeTo, $content);
+            }
+        }
+
+        return $content;
+    }
+
+    /**
      * Cache given template.
      *
      * @param string $content Template content for caching.
@@ -130,7 +154,7 @@ class Templater
 
         file_put_contents(
             $this->_cachedTemplatesDir . '/' . $contentHash . '.php',
-            $content
+            $this->_normalizeContent($content)
         );
     }
 }
