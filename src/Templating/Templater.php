@@ -72,6 +72,13 @@ class Templater
         return $response->sendResponse($content);
     }
 
+    /**
+     * Read template template content form cached file.
+     *
+     * @param String $template Template name.
+     *
+     * @return string
+     */
     private function _readeTemplate($template)
     {
         $templatesPath = $this->_templatesPath;
@@ -84,7 +91,8 @@ class Templater
             $templateContent = file_get_contents($templatesPath . '/' . $template);
             $contentHash = md5(trim($templateContent));
 
-            $cachedTemplate = $this->_cachedTemplatesDir . '/' . $contentHash . '.php';
+            $cachedTemplate = $this->_cachedTemplatesDir .
+                '/' . $contentHash . '.php';
 
             //Cache template
             if (!file_exists($cachedTemplate)) {
@@ -109,10 +117,20 @@ class Templater
         return $content;
     }
 
+    /**
+     * Cache given template.
+     *
+     * @param string $content Template content for caching.
+     *
+     * @return void
+     */
     private function _cacheTemplate($content)
     {
         $contentHash = md5(trim($content));
 
-        file_put_contents($this->_cachedTemplatesDir . '/' . $contentHash . '.php', $content);
+        file_put_contents(
+            $this->_cachedTemplatesDir .
+            '/' . $contentHash . '.php', $content
+        );
     }
 }
