@@ -129,8 +129,8 @@ class Templater
         $contentHash = md5(trim($content));
 
         file_put_contents(
-            $this->_cachedTemplatesDir .
-            '/' . $contentHash . '.php', $content
+            $this->_cachedTemplatesDir . '/' . $contentHash . '.php',
+            $content
         );
     }
 }
